@@ -1,4 +1,4 @@
-<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests | orderBy:'-date_created'">
+<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests | orderObjectBy:'date_created':true">
   <div class="panel-heading">
     <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
   </div>

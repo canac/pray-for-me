@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'angularMoment'
+    'angularMoment',
+    'ngOrderObjectBy'
   ])
 
   .config(function ($stateProvider, $urlRouterProvider) {
