@@ -43,6 +43,12 @@ angular
         controller: 'NewRequestCtrl',
         controllerAs: 'newRequest'
       })
+      .state('request-detail', {
+        url: '/request/:id',
+        templateUrl: 'views/request-detail.html',
+        controller: 'RequestDetailCtrl',
+        controllerAs: 'requestDetail'
+      })
       .state('feed', {
         url: '/feed',
         templateUrl: 'views/feed.html',

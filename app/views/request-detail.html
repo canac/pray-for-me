@@ -1,6 +1,6 @@
-<div class="panel panel-default" ng-repeat="request in requests | orderBy:'-timestamp'">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <a ui-sref="request-detail({ id: request.id })">{{request.author}} (<span am-time-ago="request.timestamp"></span>)</a>
+    <h3 class="panel-title">{{request.author}}</h3> (<span am-time-ago="request.timestamp"></span>)
   </div>
   <div class="panel-body">
     <div class="row">
