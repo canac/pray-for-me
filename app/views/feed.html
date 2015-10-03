@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4">
+    <button class="btn btn-lg btn-block btn-primary" style="margin-bottom: 2em;" ng-click="reload()" ng-disabled="loading"><span class="fa fa-refresh fa-spin" ng-class="{ hide: !loading }"></span> Refresh</button>
+  </div>
+</div>
 <div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests | orderObjectBy:'date_created':true">
   <div class="panel-heading">
     <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
