@@ -36,6 +36,11 @@ angular
         controller: 'NewRequestCtrl',
         controllerAs: 'newRequest'
       })
+      .when('/feed', {
+        templateUrl: 'views/feed.html',
+        controller: 'FeedCtrl',
+        controllerAs: 'feed'
+      })
       .otherwise({
         redirectTo: '/'
       });
