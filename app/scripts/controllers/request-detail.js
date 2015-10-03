@@ -10,8 +10,11 @@
 angular.module('prayForMeApp')
   .controller('RequestDetailCtrl', function ($scope, $stateParams, requests) {
     // Find the request that the current state represents
-    requests.getRequest(parseInt($stateParams.id, 10)).then(function(request) {
+    $scope.loading = true;
+    requests.getRequest($stateParams.id).then(function(request) {
       $scope.request = request;
+    }).finally(function() {
+      $scope.loading = false;
     });
 
     // Lookup the icon class name to use for the given request scope
