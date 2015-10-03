@@ -1,4 +1,13 @@
 <div class="panel panel-default" ng-repeat="request in requests | orderBy:'-timestamp'">
   <div class="panel-heading">{{request.author}} (<span am-time-ago="request.timestamp"></span>)</div>
-  <div class="panel-body">{{request.content}}</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-9">
+        {{request.content}}
+      </div>
+      <div class="col-xs-3">
+        <button class="btn pull-right">Respond</button>
+      </div>
+    </div>
+  </div>
 </div>
