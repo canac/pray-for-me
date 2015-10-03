@@ -8,17 +8,18 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('FeedCtrl', function ($scope, requests) {
+  .controller('FeedCtrl', function (requests) {
+    var self = this;
     var updateRequests = function() {
-      $scope.loading = true;
+      self.loading = true;
       requests.getList('feed').then(function(requests) {
-        $scope.requests = requests;
+        self.requests = requests;
       }).finally(function() {
-        $scope.loading = false;
+        self.loading = false;
       });
     };
 
-    $scope.reload = function() {
+    this.reload = function() {
       requests.loadRequests();
       updateRequests();
     };

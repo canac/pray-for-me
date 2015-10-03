@@ -8,13 +8,13 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('NewRequestCtrl', function ($scope, $state, requests) {
-    $scope.loading = false;
+  .controller('NewRequestCtrl', function ($state, requests) {
+    this.loading = false;
 
-    $scope.create = function() {
+    var self = this;
+    this.create = function() {
       // Create the new request, clear the request description field, and open the new request
-      var self = this;
-      $scope.loading = true;
+      self.loading = true;
       requests.addRequest({
         description: this.description,
         private: this.private
@@ -22,7 +22,7 @@ angular.module('prayForMeApp')
         self.description = '';
         $state.go('request-detail', { id: request.id });
       }).finally(function() {
-        $scope.loading = false;
+        self.loading = false;
       });
     };
   });

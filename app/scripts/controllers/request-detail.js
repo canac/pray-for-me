@@ -8,17 +8,18 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('RequestDetailCtrl', function ($scope, $stateParams, requests) {
+  .controller('RequestDetailCtrl', function ($stateParams, requests) {
     // Find the request that the current state represents
-    $scope.loading = true;
+    var self = this;
+    this.loading = true;
     requests.getRequest($stateParams.id).then(function(request) {
-      $scope.request = request;
+      self.request = request;
     }).finally(function() {
-      $scope.loading = false;
+      self.loading = false;
     });
 
     // Lookup the icon class name to use for the given request scope
-    $scope.getScopeIcon = function(scope) {
+    this.getScopeIcon = function(scope) {
       var iconMap = {
         public: 'fa-globe',
         circles: 'fa-group',

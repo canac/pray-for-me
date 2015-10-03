@@ -1,12 +1,12 @@
-<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-hide="loading">
+<div class="panel" ng-class="{ 'panel-default': requestDetail.request.state === 'active', 'panel-success': requestDetail.request.state === 'closed' }" ng-hide="requestDetail.loading">
   <div class="panel-heading">
-    <h3 class="panel-title">{{request.user_full_name}}</h3>
-    <i class="fa" ng-class="getScopeIcon(request.scope)"></i> Created <span am-time-ago="request.date_created"></span><span ng-show="request.state === 'closed'">, closed <span am-time-ago="request.date_closed"></span></span>
+    <h3 class="panel-title">{{requestDetail.request.user_full_name}}</h3>
+    <i class="fa" ng-class="requestDetail.getScopeIcon(requestDetail.request.scope)"></i> Created <span am-time-ago="requestDetail.request.date_created"></span><span ng-show="requestDetail.request.state === 'closed'">, closed <span am-time-ago="requestDetail.request.date_closed"></span></span>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-9">
-        {{request.description}}
+        {{requestDetail.request.description}}
       </div>
       <div class="col-xs-3">
         <button class="btn pull-right">Respond</button>
