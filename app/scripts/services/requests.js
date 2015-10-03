@@ -8,7 +8,7 @@
  * Factory in the prayForMeApp.
  */
 angular.module('prayForMeApp')
-  .factory('requests', function ($http) {
+  .factory('requests', function ($http, $q) {
 
     var rootRoute = 'http://ec2-52-5-131-18.compute-1.amazonaws.com';
 
@@ -48,45 +48,38 @@ angular.module('prayForMeApp')
           });
           return requests;
         }).then(function(requests) {
-          var all = {};
-          var feed = {};
-          var own = {};
+          var lists = {
+            all: {},
+            feed: {},
+            own: {}
+          };
           requests.forEach(function(request) {
             // Place every request in the "all" list
             // Also, place the request in either the "feed" or "own" list
             // depending on whether it was created by the current user
-            var list = request.user_id === currentUserId ? own : feed;
-            all[request.id] = list[request.id] = request;
+            var list = request.user_id === currentUserId ? lists.own : lists.feed;
+            lists.all[request.id] = list[request.id] = request;
           });
-          return { all: all, feed: feed, own: own };
+          return lists;
         });
 
         // Create promises from each of the lists
-        promises.all = promise.then(function(lists) {
-          return lists.all;
-        });
-        promises.feed = promise.then(function(lists) {
-          return lists.feed;
-        });
-        promises.own = promise.then(function(lists) {
-          return lists.own;
+        promises.lists = {};
+        ['all', 'feed', 'own'].forEach(function(list) {
+          promises.lists[list] = promises.all = promise.then(function(lists) {
+            return lists[list];
+          });
         });
 
-        return promises.all;
+        return promises.lists.all;
       },
 
-      getAll: function() {
-        return promises.all;
-      },
-      getFeed: function() {
-        return promises.feed;
-      },
-      getOwn: function() {
-        return promises.own;
+      getList: function(list) {
+        return promises.lists[list] || $q.reject(new Error('Unknown list name: ' + list));
       },
 
       getRequest: function(id) {
-        return api.getAll().then(function(requests) {
+        return api.getList('all').then(function(requests) {
           return requests[id] || null;
         });
       },
@@ -101,10 +94,10 @@ angular.module('prayForMeApp')
           }).then(function(res) {
             // Add the new request to the "all" and "own" lists
             var newRequest = res.data;
-            promises.all.then(function(all) {
+            promises.lists.all.then(function(all) {
               all[newRequest.id] = newRequest;
             });
-            promises.own.then(function(own) {
+            promises.lists.own.then(function(own) {
               own[newRequest.id] = newRequest;
             });
             return newRequest;
