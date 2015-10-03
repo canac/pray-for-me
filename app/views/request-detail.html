@@ -1,7 +1,7 @@
 <div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }">
   <div class="panel-heading">
     <h3 class="panel-title">{{request.author}}</h3>
-    Created <span am-time-ago="request.timestamp"></span><span ng-show="request.state === 'closed'">, closed <span am-time-ago="request.closedTimestamp"></span></span>
+    <i class="fa" ng-class="getScopeIcon(request.scope)"></i> Created <span am-time-ago="request.timestamp"></span><span ng-show="request.state === 'closed'">, closed <span am-time-ago="request.closedTimestamp"></span></span>
   </div>
   <div class="panel-body">
     <div class="row">

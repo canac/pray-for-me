@@ -45,14 +45,23 @@ angular.module('prayForMeApp')
       author: 'Sally Doe',
       timestamp: Date.now() - 3 * 60 * 1000,
       content: 'A prayer request',
+      scope: 'public',
       state: 'active'
     });
     api.addRequest({
       author: 'John Doe',
       timestamp: Date.now() - 2 * 60 * 1000,
       content: 'Another prayer request',
+      scope: 'circles',
       state: 'closed',
       closedTimestamp: Date.now() - 1 * 60 * 1000
+    });
+    api.addRequest({
+      author: 'John Doe',
+      timestamp: Date.now() - 30 * 1000,
+      content: 'One more prayer request',
+      scope: 'private',
+      state: 'active'
     });
 
     return api;
