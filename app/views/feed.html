@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-repeat="request in requests.getList() | orderBy:'-timestamp'">
+<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests.getList() | orderBy:'-timestamp'">
   <div class="panel-heading">
     <a ui-sref="request-detail({ id: request.id })">{{request.author}} (<span am-time-ago="request.timestamp"></span>)</a>
   </div>

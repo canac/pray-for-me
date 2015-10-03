@@ -44,11 +44,15 @@ angular.module('prayForMeApp')
     api.addRequest({
       author: 'Sally Doe',
       timestamp: Date.now() - 3 * 60 * 1000,
-      content: 'A prayer request'
+      content: 'A prayer request',
+      state: 'active'
     });
     api.addRequest({
       author: 'John Doe',
-      content: 'Another prayer request'
+      timestamp: Date.now() - 2 * 60 * 1000,
+      content: 'Another prayer request',
+      state: 'closed',
+      closedTimestamp: Date.now() - 1 * 60 * 1000
     });
 
     return api;
