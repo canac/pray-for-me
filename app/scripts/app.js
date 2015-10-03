@@ -38,7 +38,7 @@ angular
         controllerAs: 'about'
       })
       .state('new-request', {
-        url: '/new-request',
+        url: '/request/new',
         templateUrl: 'views/new-request.html',
         controller: 'NewRequestCtrl',
         controllerAs: 'newRequest'
