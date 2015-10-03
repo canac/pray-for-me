@@ -50,10 +50,12 @@ angular.module('prayForMeApp')
           requests.forEach(augmentRequest);
           return requests;
         }).then(function(requests) {
+          // The "all" list is a hash of requests, indexed by the request id
+          // The "feed" and "own" lists are arrays of requests
           var lists = {
             all: {},
-            feed: {},
-            own: {}
+            feed: [],
+            own: []
           };
           requests.forEach(function(request) {
             // Place every request in the "all" list
@@ -61,7 +63,8 @@ angular.module('prayForMeApp')
             // depending on whether it was created by the current user
             var list = request.user_id === currentUserId ? 'own' : 'feed';
             request.list = list;
-            lists.all[request.id] = lists[list][request.id] = request;
+            lists.all[request.id] = request;
+            lists[list].push(request);
           });
           return lists;
         });
@@ -102,7 +105,7 @@ angular.module('prayForMeApp')
               all[newRequest.id] = newRequest;
             });
             promises.lists.own.then(function(own) {
-              own[newRequest.id] = newRequest;
+              own.push(newRequest);
             });
             return newRequest;
           });

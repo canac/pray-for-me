@@ -67,5 +67,17 @@ angular
         data: {
           list: 'own'
         }
+      })
+      .state('closed-list', {
+        url: '/list/closed',
+        templateUrl: 'views/request-list.html',
+        controller: 'RequestListCtrl',
+        controllerAs: 'requestList',
+        data: {
+          list: 'own',
+          filter: function(request) {
+            return request.state === 'closed';
+          }
+        }
       });
   });

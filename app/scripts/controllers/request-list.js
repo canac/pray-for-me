@@ -20,6 +20,9 @@ angular.module('prayForMeApp')
       });
     };
 
+    // This filter restricts which requests are displayed
+    this.filter = $state.current.data.filter;
+
     this.reload = function() {
       requests.loadRequests();
       updateRequests();

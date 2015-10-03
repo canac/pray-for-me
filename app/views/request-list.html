@@ -3,7 +3,7 @@
     <button class="btn btn-lg btn-block btn-primary" style="margin-bottom: 2em;" ng-click="requestList.reload()" ng-disabled="requestList.loading"><span class="fa fa-refresh fa-spin" ng-class="{ hide: !requestList.loading }"></span> Refresh</button>
   </div>
 </div>
-<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requestList.requests | orderObjectBy:'date_created':true">
+<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requestList.requests | filter:requestList.filter | orderBy:'-date_created'">
   <div class="panel-heading">
     <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
   </div>
