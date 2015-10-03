@@ -1,11 +1,11 @@
-<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests.getList() | orderBy:'-timestamp'">
+<div class="panel" ng-class="{ 'panel-default': request.state === 'active', 'panel-success': request.state === 'closed' }" ng-repeat="request in requests | orderBy:'-date_created'">
   <div class="panel-heading">
-    <a ui-sref="request-detail({ id: request.id })">{{request.author}} (<span am-time-ago="request.timestamp"></span>)</a>
+    <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-9">
-        {{request.content}}
+        {{request.description}}
       </div>
       <div class="col-xs-3">
         <button class="btn pull-right">Respond</button>

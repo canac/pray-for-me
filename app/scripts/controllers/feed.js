@@ -9,5 +9,7 @@
  */
 angular.module('prayForMeApp')
   .controller('FeedCtrl', function ($scope, requests) {
-    $scope.requests = requests;
+    requests.getList().then(function(requests) {
+      $scope.requests = requests;
+    });
   });
