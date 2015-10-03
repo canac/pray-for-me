@@ -11,7 +11,7 @@ angular.module('prayForMeApp')
   .controller('FeedCtrl', function ($scope, requests) {
     var updateRequests = function() {
       $scope.loading = true;
-      requests.getRequests().then(function(requests) {
+      requests.getFeed().then(function(requests) {
         $scope.requests = requests;
       }).finally(function() {
         $scope.loading = false;
