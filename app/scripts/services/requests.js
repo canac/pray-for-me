@@ -16,6 +16,15 @@ angular.module('prayForMeApp')
       return Math.floor(Math.random() * max);
     };
 
+    // Add extra properties to requests, including scope, state, and date closed
+    var augmentRequest = function(request) {
+      request.scope = ['public', 'circles', 'private'][randomInteger(3)];
+      request.state = ['active', 'closed'][randomInteger(2)];
+      if (request.state === 'closed') {
+        request.date_closed = Date.now() - randomInteger(30) * 60 * 1000;
+      }
+    };
+
     var promises = {};
 
     // Public API here
@@ -38,14 +47,7 @@ angular.module('prayForMeApp')
           });
         }).then(function(res) {
           var requests = res.data.prayer_requests.prayer_request;
-          requests.forEach(function(request) {
-            // Augment received data
-            request.scope = ['public', 'circles', 'private'][randomInteger(3)];
-            request.state = ['active', 'closed'][randomInteger(2)];
-            if (request.state === 'closed') {
-              request.date_closed = Date.now() - randomInteger(30) * 60 * 1000;
-            }
-          });
+          requests.forEach(augmentRequest);
           return requests;
         }).then(function(requests) {
           var lists = {
@@ -94,6 +96,7 @@ angular.module('prayForMeApp')
           }).then(function(res) {
             // Add the new request to the "all" and "own" lists
             var newRequest = res.data;
+            augmentRequest(newRequest);
             promises.lists.all.then(function(all) {
               all[newRequest.id] = newRequest;
             });
