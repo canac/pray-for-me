@@ -8,9 +8,11 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('NewRequestCtrl', function ($scope, requests) {
+  .controller('NewRequestCtrl', function ($scope, $state, requests) {
     $scope.create = function() {
-      requests.push({ author: 'Current User', timestamp: Date.now(), content: this.content });
+      // Create the new request, clear the request content field, and open the new request
+      var request = requests.addRequest({ author: 'Current User', content: this.content });
       this.content = '';
+      $state.go('request-detail', { id: request.id });
     };
   });

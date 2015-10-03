@@ -27,8 +27,12 @@ angular.module('prayForMeApp')
       },
 
       addRequest: function(request) {
-        request.id = ++nextId;
+        request.id = nextId++;
+        if (!request.timestamp) {
+          request.timestamp = Date.now();
+        }
         requests[request.id] = request;
+        return request;
       },
 
       removeRequest: function(id) {
@@ -44,7 +48,6 @@ angular.module('prayForMeApp')
     });
     api.addRequest({
       author: 'John Doe',
-      timestamp: Date.now(),
       content: 'Another prayer request'
     });
 
