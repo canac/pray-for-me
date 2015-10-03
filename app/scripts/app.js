@@ -15,33 +15,37 @@ angular
     'ngCookies',
     'ngMessages',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
+
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('main', {
+        url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
+      .state('about', {
+        url: '/about',
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/new-request', {
+      .state('new-request', {
+        url: '/new-request',
         templateUrl: 'views/new-request.html',
         controller: 'NewRequestCtrl',
         controllerAs: 'newRequest'
       })
-      .when('/feed', {
+      .state('feed', {
+        url: '/feed',
         templateUrl: 'views/feed.html',
         controller: 'FeedCtrl',
         controllerAs: 'feed'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
   });
