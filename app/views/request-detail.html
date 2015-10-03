@@ -1,5 +1,6 @@
 <div class="panel" ng-class="{ 'panel-default': requestDetail.request.state === 'active', 'panel-success': requestDetail.request.state === 'closed' }" ng-hide="requestDetail.loading">
   <div class="panel-heading">
+    <button class="btn btn-success pull-right" ng-show="requestDetail.closable" ng-disabled="requestDetail.closing" ng-click="requestDetail.close()"><i class="fa fa-check"></i> Close</button>
     <h3 class="panel-title">{{requestDetail.request.user_full_name}}</h3>
     <i class="fa" ng-class="requestDetail.getScopeIcon(requestDetail.request.scope)"></i> Created <span am-time-ago="requestDetail.request.date_created"></span><span ng-show="requestDetail.request.state === 'closed'">, closed <span am-time-ago="requestDetail.request.date_closed"></span></span>
   </div>

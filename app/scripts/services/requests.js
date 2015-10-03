@@ -18,7 +18,7 @@ angular.module('prayForMeApp')
 
     // Add extra properties to requests, including scope, state, and date closed
     var augmentRequest = function(request) {
-      request.scope = ['public', 'circles', 'private'][randomInteger(3)];
+      request.scope = request.is_private ? 'private' : 'public';
       request.state = ['active', 'closed'][randomInteger(2)];
       if (request.state === 'closed') {
         request.date_closed = Date.now() - randomInteger(30) * 60 * 1000;
@@ -59,8 +59,9 @@ angular.module('prayForMeApp')
             // Place every request in the "all" list
             // Also, place the request in either the "feed" or "own" list
             // depending on whether it was created by the current user
-            var list = request.user_id === currentUserId ? lists.own : lists.feed;
-            lists.all[request.id] = list[request.id] = request;
+            var list = request.user_id === currentUserId ? 'own' : 'feed';
+            request.list = list;
+            lists.all[request.id] = lists[list][request.id] = request;
           });
           return lists;
         });
@@ -105,6 +106,14 @@ angular.module('prayForMeApp')
             });
             return newRequest;
           });
+        });
+      },
+
+      closeRequest: function(request) {
+        return promises.userId.then(function(userId) {
+          request.state = 'closed';
+          request.date_closed = Date.now();
+          return request;
         });
       }
     };
