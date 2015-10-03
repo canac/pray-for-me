@@ -14,7 +14,10 @@ angular.module('prayForMeApp')
     $scope.create = function() {
       // Create the new request, clear the request description field, and open the new request
       $scope.loading = true;
-      requests.addRequest(this.description).then(function(request) {
+      requests.addRequest({
+        description: this.description,
+        private: this.private
+      }).then(function(request) {
         this.description = '';
         $state.go('request-detail', { id: request.id });
       }).finally(function() {

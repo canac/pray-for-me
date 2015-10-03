@@ -59,11 +59,13 @@ angular.module('prayForMeApp')
         });
       },
 
-      addRequest: function(description) {
+      addRequest: function(data) {
         return $http.post(rootRoute + '/prayer_requests', {
           data: {
             user_id: userId,
-            description: description
+            title: '',
+            description: data.description,
+            is_private: data.private
           }
         }).then(function(res) {
           var newRequest = res.data.request;
