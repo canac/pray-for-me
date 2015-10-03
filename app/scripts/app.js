@@ -31,6 +31,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/new-request', {
+        templateUrl: 'views/new-request.html',
+        controller: 'NewRequestCtrl',
+        controllerAs: 'newRequest'
+      })
       .otherwise({
         redirectTo: '/'
       });
