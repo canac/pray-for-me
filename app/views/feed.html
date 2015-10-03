@@ -1,12 +1,4 @@
-<div class="panel panel-default">
-  <div class="panel-heading">John Doe (15 minutes ago)</div>
-  <div class="panel-body">
-    A prayer request
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">Sally Doe (2 hours ago)</div>
-  <div class="panel-body">
-    Another prayer request
-  </div>
+<div class="panel panel-default" ng-repeat="request in requests | orderBy:'-timestamp'">
+  <div class="panel-heading">{{request.author}} (<span am-time-ago="request.timestamp"></span>)</div>
+  <div class="panel-body">{{request.content}}</div>
 </div>
