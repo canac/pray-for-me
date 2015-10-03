@@ -50,10 +50,22 @@ angular
         controller: 'RequestDetailCtrl',
         controllerAs: 'requestDetail'
       })
-      .state('feed', {
-        url: '/feed',
-        templateUrl: 'views/feed.html',
-        controller: 'FeedCtrl',
-        controllerAs: 'feed'
+      .state('feed-list', {
+        url: '/list/feed',
+        templateUrl: 'views/request-list.html',
+        controller: 'RequestListCtrl',
+        controllerAs: 'requestList',
+        data: {
+          list: 'feed'
+        }
+      })
+      .state('own-list', {
+        url: '/list/own',
+        templateUrl: 'views/request-list.html',
+        controller: 'RequestListCtrl',
+        controllerAs: 'requestList',
+        data: {
+          list: 'own'
+        }
       });
   });

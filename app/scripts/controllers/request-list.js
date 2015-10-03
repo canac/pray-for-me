@@ -2,17 +2,18 @@
 
 /**
  * @ngdoc function
- * @name prayForMeApp.controller:FeedCtrl
+ * @name prayForMeApp.controller:RequestListCtrl
  * @description
- * # FeedCtrl
+ * # RequestListCtrl
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('FeedCtrl', function (requests) {
+  .controller('RequestListCtrl', function ($state, requests) {
     var self = this;
+    var list = $state.current.data.list || 'all';
     var updateRequests = function() {
       self.loading = true;
-      requests.getList('feed').then(function(requests) {
+      requests.getList(list).then(function(requests) {
         self.requests = requests;
       }).finally(function() {
         self.loading = false;
