@@ -8,10 +8,9 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('NewRequestCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('NewRequestCtrl', function ($scope, requests) {
+    $scope.create = function() {
+      requests.push({ author: 'Current User', timestamp: Date.now(), content: this.content });
+      this.content = '';
+    };
   });
