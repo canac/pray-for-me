@@ -32,12 +32,6 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .state('about', {
-        url: '/about',
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .state('new-request', {
         url: '/request/new',
         templateUrl: 'views/new-request.html',
