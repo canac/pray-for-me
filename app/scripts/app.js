@@ -76,7 +76,7 @@ angular
         data: {
           list: 'own',
           filter: function(request) {
-            return request.state === 'closed';
+            return request.is_closed;
           }
         }
       });

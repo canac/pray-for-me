@@ -15,7 +15,7 @@ angular.module('prayForMeApp')
     this.closable = false;
     requests.getRequest($stateParams.id).then(function(request) {
       self.request = request;
-      self.closable = request.list === 'own' && request.state === 'active';
+      self.closable = request.list === 'own' && !request.is_closed;
     }).finally(function() {
       self.loading = false;
     });

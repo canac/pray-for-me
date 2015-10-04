@@ -12,17 +12,9 @@ angular.module('prayForMeApp')
 
     var rootRoute = 'http://ec2-52-5-131-18.compute-1.amazonaws.com';
 
-    var randomInteger = function(max) {
-      return Math.floor(Math.random() * max);
-    };
-
-    // Add extra properties to requests, including scope, state, and date closed
+    // Massage raw request data
     var augmentRequest = function(request) {
       request.scope = request.is_private ? 'private' : 'public';
-      request.state = ['active', 'closed'][randomInteger(2)];
-      if (request.state === 'closed') {
-        request.date_closed = Date.now() - randomInteger(30) * 60 * 1000;
-      }
     };
 
     var promises = {};
@@ -113,9 +105,12 @@ angular.module('prayForMeApp')
       },
 
       closeRequest: function(request) {
-        return promises.userId.then(function(userId) {
-          request.state = 'closed';
-          request.date_closed = Date.now();
+        return $http.put(rootRoute + '/prayer_requests/' + request.id, {
+          update_action: 'close'
+        }).then(function(res) {
+          var newRequest = res.data;
+          request.is_closed = newRequest.is_closed;
+          request.date_closed = newRequest.date_closed;
           return request;
         });
       }
