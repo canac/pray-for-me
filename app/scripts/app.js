@@ -23,7 +23,7 @@ angular
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
-    $urlRouterProvider.when('/', '/list/feed');
+    $urlRouterProvider.when('/', '/list/prayer');
 
     $stateProvider
       .state('new-request', {
@@ -38,8 +38,8 @@ angular
         controller: 'RequestDetailCtrl',
         controllerAs: 'requestDetail'
       })
-      .state('feed-list', {
-        url: '/list/feed',
+      .state('prayer-list', {
+        url: '/list/prayer',
         templateUrl: 'views/request-list.html',
         controller: 'RequestListCtrl',
         controllerAs: 'requestList',
