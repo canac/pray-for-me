@@ -86,7 +86,7 @@ angular.module('prayForMeApp')
         return promises.userId.then(function(userId) {
           return $http.post(rootRoute + '/prayer_requests', {
             user_id: userId,
-            title: '',
+            title: data.title,
             description: data.description,
             is_private: data.private
           }).then(function(res) {

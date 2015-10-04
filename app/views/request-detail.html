@@ -5,13 +5,8 @@
     <i class="fa" ng-class="requestDetail.getScopeIcon(requestDetail.request.scope)"></i> Created <span am-time-ago="requestDetail.request.date_created"></span><span ng-show="requestDetail.request.is_closed">, closed <span am-time-ago="requestDetail.request.date_closed"></span></span>
   </div>
   <div class="panel-body">
-    <div class="row">
-      <div class="col-xs-9">
-        {{requestDetail.request.description}}
-      </div>
-      <div class="col-xs-3">
-        <button class="btn pull-right">Respond</button>
-      </div>
-    </div>
+    <h3>{{requestDetail.request.title}}</h3>
+    <button class="btn pull-right">Respond</button>
+    {{requestDetail.request.description}}
   </div>
 </div>
