@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Pray for Me</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" ui-sref="main">prayForMe</a>
+            <a class="navbar-brand" ui-sref="main">Pray for Me</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -50,10 +50,11 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ login.fullname }} <span class="caret"></span></a>
                 <form class="dropdown-menu" style="padding: 1em; padding-bottom: 0;">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" ng-model="login.username">
+                    <label>Username</label>
+                    <input type="text" class="form-control" ng-model="login.username">
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary" ng-click="login.login()" ng-disabled="login.loading"><span class="fa fa-spinner fa-spin" ng-class="{ hide: !login.loading }"></span> Login</button>
+                    <button type="submit" class="btn btn-primary btn-block" ng-click="login.login()" ng-disabled="login.loading"><span class="fa fa-spinner fa-spin" ng-class="{ hide: !login.loading }"></span> Login</button>
                   </div>
                 </form>
               </li>
