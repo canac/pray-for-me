@@ -11,6 +11,7 @@ angular.module('prayForMeApp')
   .controller('RequestListCtrl', function ($state, requests) {
     var self = this;
     var list = $state.current.data.list || 'all';
+    this.loading = false;
     var updateRequests = function() {
       self.loading = true;
       requests.getList(list).then(function(requests) {
