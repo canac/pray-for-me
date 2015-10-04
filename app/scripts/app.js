@@ -24,14 +24,9 @@ angular
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.when('/', '/list/feed');
 
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
       .state('new-request', {
         url: '/request/new',
         templateUrl: 'views/new-request.html',
