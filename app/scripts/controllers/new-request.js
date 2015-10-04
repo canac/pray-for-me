@@ -10,6 +10,7 @@
 angular.module('prayForMeApp')
   .controller('NewRequestCtrl', function ($state, requests) {
     this.private = false;
+    this.visibility = 'public';
 
     var self = this;
     this.loading = false;
@@ -19,7 +20,7 @@ angular.module('prayForMeApp')
       requests.addRequest({
         description: this.description,
         title: this.title,
-        private: this.private
+        private: this.visibility === 'private'
       }).then(function(request) {
         self.description = '';
         $state.go('request-detail', { id: request.id });
