@@ -8,7 +8,7 @@
  * Controller of the prayForMeApp
  */
 angular.module('prayForMeApp')
-  .controller('RequestListCtrl', function ($state, requests) {
+  .controller('RequestListCtrl', function ($rootScope, $state, requests) {
     var self = this;
     var list = $state.current.data.list || 'all';
     this.loading = false;
@@ -28,6 +28,11 @@ angular.module('prayForMeApp')
       requests.loadRequests();
       updateRequests();
     };
+
+    // Update the list of requests whenever the currently logged in user changes
+    $rootScope.$on('login', function() {
+      updateRequests();
+    });
 
     updateRequests();
   });

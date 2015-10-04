@@ -8,7 +8,7 @@
  * Factory in the prayForMeApp.
  */
 angular.module('prayForMeApp')
-  .factory('requests', function ($http, $q) {
+  .factory('requests', function ($rootScope, $http, $q) {
 
     var rootRoute = 'http://ec2-52-5-131-18.compute-1.amazonaws.com';
 
@@ -26,6 +26,8 @@ angular.module('prayForMeApp')
         var promise = promises.user = $http.get(rootRoute + '/users', {
           params: { username: username }
         }).then(function(res) {
+          // Broadcast that the current user changed
+          $rootScope.$emit('login');
           return res.data;
         });
 
