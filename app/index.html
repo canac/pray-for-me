@@ -44,6 +44,19 @@
               <li ui-sref-active="active"><a ui-sref="own-list">My Requests</a></li>
               <li ui-sref-active="active"><a ui-sref="closed-list">Prayer Wall</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown" ng-controller="LoginCtrl as login">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ login.fullname }} <span class="caret"></span></a>
+                <form class="dropdown-menu" style="padding: 1em; padding-bottom: 0;">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" ng-model="login.username">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary" ng-click="login.login()" ng-disabled="login.loading"><span class="fa fa-spinner fa-spin" ng-class="{ hide: !login.loading }"></span> Login</button>
+                  </div>
+                </form>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -94,6 +107,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/request-list.js"></script>
         <script src="scripts/controllers/request-detail.js"></script>
         <script src="scripts/controllers/new-request.js"></script>

@@ -23,18 +23,26 @@ angular.module('prayForMeApp')
     // Public API here
     var api = {
       login: function(username) {
-        var promise = promises.userId = $http.get(rootRoute + '/users', {
+        var promise = promises.user = $http.get(rootRoute + '/users', {
           params: { username: username }
         }).then(function(res) {
-          return res.data.id;
+          return res.data;
         });
+
+        // Reload the request list because the user changed
+        api.loadRequests();
+
         return promise;
+      },
+
+      getUser: function() {
+        return promises.user;
       },
 
       loadRequests: function() {
         var currentUserId = null;
-        var promise = promises.requests = promises.userId.then(function(userId) {
-          currentUserId = userId;
+        var promise = promises.requests = api.getUser().then(function(user) {
+          currentUserId = user.id;
           return $http.get(rootRoute + '/users/' + currentUserId + '/prayer_requests/', {
             params: { scope: 'all' }
           });
@@ -84,9 +92,9 @@ angular.module('prayForMeApp')
       },
 
       addRequest: function(data) {
-        return promises.userId.then(function(userId) {
+        return api.getUser().then(function(user) {
           return $http.post(rootRoute + '/prayer_requests', {
-            user_id: userId,
+            user_id: user.id,
             title: data.title,
             description: data.description,
             is_private: data.private
@@ -117,10 +125,10 @@ angular.module('prayForMeApp')
       },
 
       createResponse: function(request, description) {
-        return promises.userId.then(function(userId) {
+        return api.getUser().then(function(user) {
           return $http.post(rootRoute + '/prayer_responses', {
             prayer_request_id: request.id,
-            user_id: userId,
+            user_id: user.id,
             description: description
           }).then(function(res) {
             var newResponse = res.data;
@@ -133,7 +141,6 @@ angular.module('prayForMeApp')
 
     // Load the requests on startup
     api.login('caleb');
-    api.loadRequests();
 
     return api;
   });
