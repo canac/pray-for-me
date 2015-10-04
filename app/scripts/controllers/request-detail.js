@@ -9,6 +9,9 @@
  */
 angular.module('prayForMeApp')
   .controller('RequestDetailCtrl', function ($stateParams, requests) {
+    // Initialize the tooltip
+    angular.element('[data-toggle="tooltip"]').tooltip();
+
     // Find the request that the current state represents
     var self = this;
     this.loading = true;
@@ -28,6 +31,16 @@ angular.module('prayForMeApp')
         private: 'fa-lock'
       };
       return iconMap[scope];
+    };
+
+    // Lookup the name of the given request scope
+    this.getScopeName = function(scope) {
+      var nameMap = {
+        public: 'Public',
+        circles: 'Circles',
+        private: 'Private'
+      };
+      return nameMap[scope];
     };
 
     this.closing = false;
