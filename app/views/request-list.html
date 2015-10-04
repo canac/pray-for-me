@@ -1,16 +1,18 @@
-<div class="row">
-  <div class="col-xs-4 col-xs-offset-4">
-    <button class="btn btn-lg btn-block btn-primary" style="margin-bottom: 2em;" ng-click="requestList.reload()" ng-disabled="requestList.loading"><span class="fa fa-refresh fa-spin" ng-class="{ hide: !requestList.loading }"></span> Refresh</button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <button class="btn btn-lg btn-block btn-primary" style="margin-bottom: 2em;" ng-click="requestList.reload()" ng-disabled="requestList.loading"><span class="fa fa-refresh fa-spin" ng-class="{ hide: !requestList.loading }"></span> Refresh</button>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="request in requestList.requests | filter:requestList.filter | orderBy:'-date_created'">
-    <div class="panel" ng-class="request.is_closed ? 'panel-success' : 'panel-default'">
-      <div class="panel-heading">
-        <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
-      </div>
-      <div class="panel-body">
-        {{request.description}}
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="request in requestList.requests | filter:requestList.filter | orderBy:'-date_created'">
+      <div class="panel" ng-class="request.is_closed ? 'panel-success' : 'panel-default'">
+        <div class="panel-heading">
+          <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
+        </div>
+        <div class="panel-body">
+          {{request.description}}
+        </div>
       </div>
     </div>
   </div>
