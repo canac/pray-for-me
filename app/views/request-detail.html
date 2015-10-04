@@ -5,8 +5,29 @@
     <i class="fa" ng-class="requestDetail.getScopeIcon(requestDetail.request.scope)"></i> Created <span am-time-ago="requestDetail.request.date_created"></span><span ng-show="requestDetail.request.is_closed">, closed <span am-time-ago="requestDetail.request.date_closed"></span></span>
   </div>
   <div class="panel-body">
-    <h3>{{requestDetail.request.title}}</h3>
-    <button class="btn pull-right">Respond</button>
-    {{requestDetail.request.description}}
+    <div class="row col-xs-12">
+      <div class="well">
+        <h3>{{requestDetail.request.title}}</h3>
+        {{requestDetail.request.description}}
+      </div>
+    </div>
+    <div class="row col-xs-12">
+      <form>
+        <div class="form-group">
+          <textarea class="form-control" ng-model="requestDetail.description" placeholder="Add your own response"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success" type="submit" ng-click="requestDetail.createResponse()" ng-disabled="requestDetail.creating"><span class="fa fa-spinner fa-spin" ng-class="{ hide: !requestDetail.creating }"></span> Post</button>
+        </div>
+      </form>
+    </div>
+    <div class="row col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="response in requestDetail.request.responses | orderBy:'-date_created'">
+          <h3>{{response.responder_full_name}} <small am-time-ago="response.date_created"></small></h3>
+          {{response.description}}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

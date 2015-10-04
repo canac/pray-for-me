@@ -15,6 +15,7 @@ angular.module('prayForMeApp')
     // Massage raw request data
     var augmentRequest = function(request) {
       request.scope = request.is_private ? 'private' : 'public';
+      request.responses = request.prayer_responses.prayer_response || [];
     };
 
     var promises = {};
@@ -112,6 +113,20 @@ angular.module('prayForMeApp')
           request.is_closed = newRequest.is_closed;
           request.date_closed = newRequest.date_closed;
           return request;
+        });
+      },
+
+      createResponse: function(request, description) {
+        return promises.userId.then(function(userId) {
+          return $http.post(rootRoute + '/prayer_responses', {
+            prayer_request_id: request.id,
+            user_id: userId,
+            description: description
+          }).then(function(res) {
+            var newResponse = res.data;
+            request.responses.push(newResponse);
+            return newResponse;
+          });
         });
       }
     };

@@ -39,4 +39,14 @@ angular.module('prayForMeApp')
         self.closing = false;
       });
     };
+
+    this.creating = false;
+    this.createResponse = function() {
+      this.creating = true;
+      requests.createResponse(this.request, this.description).then(function() {
+        self.description = '';
+      }).finally(function() {
+        self.creating = false;
+      });
+    };
   });
