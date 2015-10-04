@@ -11,6 +11,7 @@
           <a ui-sref="request-detail({ id: request.id })">{{request.user_full_name}} (<span am-time-ago="request.date_created"></span>)</a>
         </div>
         <div class="panel-body">
+          <h3 ng-show="request.title">{{request.title}}</h3>
           {{request.description}}
         </div>
       </div>
